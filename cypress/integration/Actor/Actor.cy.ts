@@ -1,3 +1,4 @@
+import { data } from "cypress/types/jquery";
 import { property } from "cypress/types/lodash";
 import { RequestServices } from "../PageObject/RequestServices";
 import { ResponseVerifier } from "../PageObject/ResponseVerifier";
@@ -37,21 +38,20 @@ When("User sends a POST HTTP request to Add Actor", () => {
 });
 
 Given("User have id of Actor which he created", () => {
-  cy.fixture("CreatedActorId").then((data) => {
-    cy.wrap(data.actorId).as(ADD_ACTOR_ALIAS);
+  cy.fixture("CreatedActorId").then((actor) => {
+    cy.wrap(`actor/${actor.actorId}`).as("temp");
   });
 });
 
 When("User sends a GET HTTP request to get Actor by id", () => {
-  requestServices.sendGet(
-    `actor/${cy.get(ADDED_ACTOR).toString()}`,
-    ALL_ACTORS_ALIAS
-  );
+  cy.fixture("CreatedActorId").then((actor) => {
+    requestServices.sendGet("temp", "AddedActorReq");
+  });
 });
 
 // ##################  Then  ####################
-Then("User should get statusCode {int} in response", (statusCode: number) => {
-  responseVerifier.verifyStatusCode(ALL_ACTORS, statusCode);
+Then("User should get statusCode {int} in response {string}", (statusCode: number, alias: string) => {
+  responseVerifier.verifyStatusCode(alias, statusCode);
 });
 
 Then(

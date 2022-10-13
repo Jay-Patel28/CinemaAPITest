@@ -5,14 +5,16 @@ declare namespace Cypress {
   }
 }
 
-Cypress.Commands.add("setLastActor", (alias: string) => {
-  const id = cy.get(alias).its("body").its("actorId").toString();
-  console.log("id: ", id);
-
-  cy.writeFile(
-    "cypress/fixtures/CreatedActorId.json",
-    JSON.stringify({ actorId: id })
-  );
+Cypress.Commands.add("setLastActor", (Id: string) => {
+  cy.get("@addActor")
+    .its("body")
+    .its("actorId")
+    .then((id) => {
+      cy.writeFile(
+        "cypress/fixtures/CreatedActorId.json",
+        JSON.stringify({ actorId: id })
+      );
+    });
 });
 
 Cypress.Commands.add("getLastActor", () => {
