@@ -1,5 +1,3 @@
-import { data } from "cypress/types/jquery";
-import { property } from "cypress/types/lodash";
 import { RequestServices } from "../PageObject/RequestServices";
 import { ResponseVerifier } from "../PageObject/ResponseVerifier";
 
@@ -14,6 +12,8 @@ const ADD_ACTOR_ENDPOINT = "addActor_endpoint";
 const ADD_ACTOR_ALIAS = "addActor";
 const ADDED_ACTOR = "@addActor";
 
+const DELETE_ACTOR_ENDPOINT = "deleteActor_endpoint";
+
 //#################  Given  #####################
 Given("User set GET all actors api endpoint", () => {
   cy.wrap("/actors").as(ALL_ACTORS_ENDPOINT);
@@ -21,6 +21,12 @@ Given("User set GET all actors api endpoint", () => {
 
 Given("User set POST actor api endpoint", () => {
   cy.wrap("/actor").as(ADD_ACTOR_ENDPOINT);
+});
+
+Given("User have id of Actor which he created", () => {
+  cy.fixture("CreatedActorId").then((actor) => {
+    cy.wrap(`actor/${actor.actorId}`).as("temp");
+  });
 });
 
 //##################  When   ####################
@@ -37,22 +43,21 @@ When("User sends a POST HTTP request to Add Actor", () => {
   cy.setLastActor(ADDED_ACTOR);
 });
 
-Given("User have id of Actor which he created", () => {
-  cy.fixture("CreatedActorId").then((actor) => {
-    cy.wrap(`actor/${actor.actorId}`).as("temp");
-  });
+When("User sends a GET HTTP request to get Actor by id", () => {
+  requestServices.sendGet("temp", "AddedActorReq");
 });
 
-When("User sends a GET HTTP request to get Actor by id", () => {
-  cy.fixture("CreatedActorId").then((actor) => {
-    requestServices.sendGet("temp", "AddedActorReq");
-  });
+When("User sends a DELETE HTTP request to get Actor by id", () => {
+  requestServices.sendDelete("temp", "deleteActorReq");
 });
 
 // ##################  Then  ####################
-Then("User should get statusCode {int} in response {string}", (statusCode: number, alias: string) => {
-  responseVerifier.verifyStatusCode(alias, statusCode);
-});
+Then(
+  "User should get statusCode {int} in response {string}",
+  (statusCode: number, alias: string) => {
+    responseVerifier.verifyStatusCode(alias, statusCode);
+  }
+);
 
 Then(
   "User should get statusCode {int} in response after Post",
