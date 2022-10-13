@@ -37,7 +37,7 @@ When("User sends a GET HTTP request for ALL Actors", () => {
 When("User sends a POST HTTP request to Add Actor", () => {
   requestServices.sendPost(
     ADD_ACTOR_ENDPOINT,
-    ADD_ACTOR_ALIAS,
+     'addActor',
     ADD_ACTOR_ALIAS
   );
   cy.setLastActor(ADDED_ACTOR);
@@ -75,5 +75,5 @@ Then("Received array should have all properties in its objects", () => {
 });
 
 Then("Recived Actor should have all added properties with true Values", () => {
-  responseVerifier.shouldHaveAllProperties(ADDED_ACTOR, "ActorProperties");
+  responseVerifier.shouldHaveAllPropertiesWithTrueValues('@'.concat(ADD_ACTOR_ALIAS), "addActor");
 });

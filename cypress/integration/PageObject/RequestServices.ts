@@ -20,11 +20,11 @@ export class RequestServices {
   ) {
     const alias = "@".concat(endpoint_alias);
     cy.get(alias).then((endpoint) => {
-      return cy
-        .request("POST", endpoint.toString(), {
-          fixture: bodyJsonFixtureName,
-        })
-        .as(returnAlias);
+      cy.fixture(bodyJsonFixtureName).then((data) => {
+        console.log("data: ", data);
+        cy.request("POST", endpoint.toString(), data).as(returnAlias);
+      });
+      cy.get("@".concat(returnAlias)).then((ans) => console.log(ans));
     });
   }
 }
