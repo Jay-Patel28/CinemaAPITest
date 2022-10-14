@@ -1,15 +1,29 @@
 import { defineConfig } from "cypress";
-const cucumber = require("cypress-cucumber-preprocessor").default;
+import { addCucumberPreprocessorPlugin } from "@badeball/cypress-cucumber-preprocessor";
+import browserify from "@badeball/cypress-cucumber-preprocessor/browserify";
+
+async function setupNodeEvents(
+  on: Cypress.PluginEvents,
+  config: Cypress.PluginConfigOptions
+): Promise<Cypress.PluginConfigOptions> {
+  // This is required for the preprocessor to be able to generate JSON reports after each run, and more,
+  await addCucumberPreprocessorPlugin(on, config);
+
+  on(
+    "file:preprocessor",
+    browserify(config, {
+      typescript: require.resolve("typescript"),
+    })
+  );
+
+  // Make sure to return the config object as it might have been modified by the plugin.
+  return config;
+}
 
 export default defineConfig({
   e2e: {
+    setupNodeEvents,
     baseUrl: "https://localhost:7114",
-    setupNodeEvents(on) {
-      const options = { 
-        typescript : require.resolve('typescript'),
-      }
-      on("file:preprocessor", cucumber(options));
-    },
     specPattern: "**/*.feature",
   },
 });
