@@ -35,11 +35,7 @@ When("User sends a GET HTTP request for ALL Actors", () => {
 });
 
 When("User sends a POST HTTP request to Add Actor", () => {
-  requestServices.sendPost(
-    ADD_ACTOR_ENDPOINT,
-     'addActor',
-    ADD_ACTOR_ALIAS
-  );
+  requestServices.sendPost(ADD_ACTOR_ENDPOINT, "addActor", ADD_ACTOR_ALIAS);
   cy.setLastActor(ADDED_ACTOR);
 });
 
@@ -71,9 +67,19 @@ Then("User receives an array of actors", () => {
 });
 
 Then("Received array should have all properties in its objects", () => {
-  responseVerifier.shouldHaveAllProperties(ALL_ACTORS, "ActorProperties");
+  responseVerifier.shouldHaveAllPropertiesInArray(
+    ALL_ACTORS,
+    "ActorProperties"
+  );
+});
+
+Then("Recived Actor should have all added properties", () => {
+  responseVerifier.shouldHaveAllProperties("@AddedActorReq", "addActor");
 });
 
 Then("Recived Actor should have all added properties with true Values", () => {
-  responseVerifier.shouldHaveAllPropertiesWithTrueValues('@'.concat(ADD_ACTOR_ALIAS), "addActor");
+  responseVerifier.shouldHaveAllPropertiesWithTrueValues(
+    "@addActor",
+    "addActor"
+  );
 });
