@@ -11,13 +11,9 @@ export class ResponseVerifier {
     cy.fixture(fixtureName).then((properties) => {
       console.log("properties: ", properties);
 
-      // for (const [key, value] of Object.entries(properties)) {
-      //   console.log(key, value);
-      // }
-
-      Array.from(properties).forEach((property) => {
+      console.log("properties: ", properties);
+      Object.keys(properties).forEach((property) => {
         cy.get(alias).its("body").its(0).should("have.a.property", property);
-        //   console.log('property: ', property);
       });
     });
   }
@@ -26,7 +22,6 @@ export class ResponseVerifier {
     cy.fixture(fixtureName).then((properties) => {
       Array.from(properties).forEach((property) => {
         cy.get(alias).its("body").should("have.a.property", property);
-        //   console.log('property: ', property);
       });
     });
   }

@@ -1,6 +1,5 @@
 Feature: Register REST-API
 
-  @focus
   Scenario Outline: User should be registered when typed valid credentials
     Given User has valid registration endpoint
     When User tries to register with "valid" <username>, <email>, <password>
