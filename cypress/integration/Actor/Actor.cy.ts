@@ -1,7 +1,7 @@
 import { RequestServices } from "../PageObject/RequestServices";
 import { ResponseVerifier } from "../PageObject/ResponseVerifier";
 
-const { Given, When, Then } = require("cypress-cucumber-preprocessor/steps");
+const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
 const responseVerifier = new ResponseVerifier();
 const requestServices = new RequestServices();
 const ALL_ACTORS_ENDPOINT = "allActors_endpoint";
