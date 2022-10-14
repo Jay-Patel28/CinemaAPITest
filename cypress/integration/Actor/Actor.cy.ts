@@ -12,8 +12,6 @@ const ADD_ACTOR_ENDPOINT = "addActor_endpoint";
 const ADD_ACTOR_ALIAS = "addActor";
 const ADDED_ACTOR = "@addActor";
 
-const DELETE_ACTOR_ENDPOINT = "deleteActor_endpoint";
-
 //#################  Given  #####################
 Given("User set GET all actors api endpoint", () => {
   cy.wrap("/actors").as(ALL_ACTORS_ENDPOINT);
