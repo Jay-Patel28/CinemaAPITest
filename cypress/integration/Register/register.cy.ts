@@ -7,10 +7,6 @@ Given("User has valid registration endpoint", () => {
 When(
   "User tries to register with {string} {string}, {string}, {string}",
   (valid: string, username: string, email: string, password: string) => {
-    console.log('valid: ', valid);
-    console.log('password: ', password);
-    console.log('email: ', email);
-    console.log('username: ', username);
     if (valid == "valid") {
       cy.tryMockRegister(username, email, password);
     } else {

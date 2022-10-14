@@ -25,9 +25,12 @@ export class ResponseVerifier {
 
   shouldHaveAllPropertiesWithTrueValues(alias: string, fixtureName: string) {
     cy.fixture(fixtureName).then((properties) => {
-      Object.keys(properties).forEach((property) => {
-        cy.get(alias).its("body").should("have.a.property", property);
-      });
+      for (const [key, value] of Object.entries(properties)) {
+        cy.get(alias).then((response: any) => {
+          response.body[key];
+          expect(response.body[key]).eq(value);
+        });
+      }
     });
   }
 }

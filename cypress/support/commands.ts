@@ -30,20 +30,6 @@ Cypress.Commands.add(
       },
     }).as("registerResponse");
   }
-  //   cy.intercept(
-  //     {
-  //       method: "POST",
-  //       url: "/api/Authenticate/register",
-  //     },
-  //     {
-  //       statusCode: 200,
-  //     }
-  //   ).as("registerResponse");
-
-  //   cy.wait("@registerResponse").then((resp) => {
-  //     console.log(resp);
-  //   });
-  // }
 );
 
 Cypress.Commands.add(
