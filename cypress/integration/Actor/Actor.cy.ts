@@ -12,6 +12,7 @@ const ADD_ACTOR_ENDPOINT = "addActor_endpoint";
 const ADD_ACTOR_ALIAS = "addActor";
 const ADDED_ACTOR = "@addActor";
 
+
 //#################  Given  #####################
 Given("User set GET all actors api endpoint", () => {
   cy.wrap("/actors").as(ALL_ACTORS_ENDPOINT);
