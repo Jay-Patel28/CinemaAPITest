@@ -1,7 +1,11 @@
 import { RequestServices } from "../PageObject/RequestServices";
 import { ResponseVerifier } from "../PageObject/ResponseVerifier";
 
-const { Given, When, Then } = require("@badeball/cypress-cucumber-preprocessor");
+const {
+  Given,
+  When,
+  Then,
+} = require("@badeball/cypress-cucumber-preprocessor");
 const responseVerifier = new ResponseVerifier();
 const requestServices = new RequestServices();
 const ALL_ACTORS_ENDPOINT = "allActors_endpoint";
@@ -11,7 +15,6 @@ const ALL_ACTORS = "@allActors";
 const ADD_ACTOR_ENDPOINT = "addActor_endpoint";
 const ADD_ACTOR_ALIAS = "addActor";
 const ADDED_ACTOR = "@addActor";
-
 
 //#################  Given  #####################
 Given("User set GET all actors api endpoint", () => {
@@ -42,7 +45,7 @@ When("User sends a GET HTTP request to get Actor by id", () => {
   requestServices.sendGet("temp", "AddedActorReq");
 });
 
-When("User sends a DELETE HTTP request to get Actor by id", () => {
+When("User sends a DELETE HTTP request to delete Actor by id", () => {
   requestServices.sendDelete("temp", "deleteActorReq");
 });
 

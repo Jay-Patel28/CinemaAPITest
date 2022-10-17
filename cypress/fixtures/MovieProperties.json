@@ -1,0 +1,7 @@
+{
+  "id": "id",
+  "movieName": "movieName",
+  "totalViews": "totalViews",
+  "releaseDate": "releaseDate",
+  "actorDTOs": "actorDTOs"
+}

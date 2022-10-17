@@ -22,5 +22,5 @@ Feature: Actors REST-API
 
   Scenario: User requests to Delete actor he/she created
     Given User have id of Actor which he created
-    When User sends a DELETE HTTP request to get Actor by id
+    When User sends a DELETE HTTP request to delete Actor by id
     Then User should get statusCode 200 in response "@deleteActorReq"
