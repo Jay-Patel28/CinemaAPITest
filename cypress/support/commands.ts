@@ -61,15 +61,15 @@ Cypress.Commands.add("setLastActor", (Id: string) => {
 });
 
 Cypress.Commands.add("getLastActor", () => {
-  //   cy.readFile("cypress/fixtures/CreatedActorId.json", (err, data) => {
-  //     if (err) {
-  //       return console.error(err);
-  //     }
-  //   }).then((data) => {
-  //     cy.fixture("CreatedActorId").then((actor) => {
-  //       return actor.actorId;
-  //     });
-  //   });
+    cy.readFile("cypress/fixtures/CreatedActorId.json", (err, data) => {
+      if (err) {
+        return console.error(err);
+      }
+    }).then((data) => {
+      cy.fixture("CreatedActorId").then((actor) => {
+        return actor.actorId;
+      });
+    });
 });
 
 Cypress.Commands.add("tryLogin", (username: string, password: string) => {

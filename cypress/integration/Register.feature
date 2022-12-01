@@ -1,5 +1,6 @@
 Feature: Register REST-API
 
+  @smoke
   Scenario Outline: User should be registered when typed valid credentials
     Given User has valid registration endpoint
     When User tries to register with "valid" <username>, <email>, <password>
@@ -9,6 +10,7 @@ Feature: Register REST-API
       | username |  | email             |  | password       |
       | "Jay3"   |  | "valid@email.com" |  | "Jay@28101998" |
 
+  @automated
   Scenario Outline: User should not be registered when typed invalid credentials
     Given User has valid registration endpoint
     When User tries to register with "invalid" <username>, <email>, <password>
@@ -18,6 +20,7 @@ Feature: Register REST-API
       | username |  | email         |  | password  |
       | "RANDOM" |  | "inemail.com" |  | "INVALID" |
 
+  @automated
   Scenario Outline: User should not be registered when he/she tries to Register with a username which already exist
     Given User has valid registration endpoint
     When User tries to register with "invalid" <username>, <email>, <password>

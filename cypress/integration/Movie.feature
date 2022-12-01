@@ -7,12 +7,14 @@ Feature: Movies REST_API
     Then User should get statusCode 200 in response after Post
     And Recived Movie should have all added properties with true Values
 
+  @automated
   Scenario: User tries to get last created Movie using its id
     Given User have id of Movie which he created
     When User sends a GET HTTP request to get Movie by id
     Then User should get statusCode 200 in response "@AddedMovieReq"
     Then Recived Movie should have all added properties
 
+  @smoke
   Scenario: User requests to get all moviess which have all properties of Movie
     Given User set GET all movies api endpoint
     When User sends a GET HTTP request for ALL Movies
