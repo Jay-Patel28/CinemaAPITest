@@ -21,5 +21,6 @@
     "@cypress/browserify-preprocessor": "^3.0.2",
     "cypress": "^10.9.0",
     "ts-transformer-keys": "^0.4.3"
-  }
+  },
+  "type": "module"
 }
